@@ -26,17 +26,16 @@ $ sudo firewall-cmd --list-ports
 [https://www.material-ui.com/#/](https://www.material-ui.com/#/)
 
 ## chat-room tutorial
-[https://juejin.im/entry/58a3f4dbb123db00545f8c68](https://juejin.im/entry/58a3f4dbb123db00545f8c68)
+[https://www.yumingyuan.me/2017/02/13/chatroom-developed-using-react-socketio-and-express.html](https://www.yumingyuan.me/2017/02/13/chatroom-developed-using-react-socketio-and-express.html)
 
 ## NPM, Webpack, React tutorial (very helpful!!)
-[https://www.yumingyuan.me/2017/02/06/Getting-Started-With-Reactjs-Using-Npm-Webpack.html]
-(https://www.yumingyuan.me/2017/02/06/Getting-Started-With-Reactjs-Using-Npm-Webpack.html)
+[https://www.yumingyuan.me/2017/02/06/Getting-Started-With-Reactjs-Using-Npm-Webpack.html](https://www.yumingyuan.me/2017/02/06/Getting-Started-With-Reactjs-Using-Npm-Webpack.html)
 
 ## Webpack-dev-server + react-hot-loader
 
 * 沒有成功把 react-hot-loader 裝起來
 * 有成功把 webpack-dev-server 的 LiveReload 弄起來了
-[https://rhadow.github.io/2015/04/02/webpack-workflow/](https://rhadow.github.io/2015/04/02/webpack-workflow/)
+* [https://rhadow.github.io/2015/04/02/webpack-workflow/](https://rhadow.github.io/2015/04/02/webpack-workflow/)
 
 ## Main Feature
 
@@ -76,4 +75,3 @@ $ sudo firewall-cmd --list-ports
 4. 刪除訊息
 5. Chatbot
 6. 搜尋訊息
-7. 
