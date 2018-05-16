@@ -8,6 +8,9 @@ const options = {
 };
 
 https.createServer(options, (req, res) => {
-    res.writeHead(200);
-    res.end('hello world\n');
+    fs.readFile('index.html',function (err, data){
+        res.writeHead(200, {'Content-Type': 'text/html','Content-Length':data.length});
+        res.write(data);
+        res.end();
+    });
 }).listen(8080, '0.0.0.0');
