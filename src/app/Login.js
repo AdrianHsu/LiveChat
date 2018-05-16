@@ -1,16 +1,13 @@
-import React, {Component} from 'react';
-import Button from 'material-ui/Button';
-import TextField from 'material-ui/TextField';
-import Dialog, {
-  DialogActions,
-  DialogContent,
-  DialogContentText,
-  DialogTitle,
-  withMobileDialog
-} from 'material-ui/Dialog';
+import React from 'react';
+import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
 
-
-class Login extends Component {
+class Login extends React.Component {
   render() {
     return (
       <Dialog 
@@ -55,4 +52,4 @@ class Login extends Component {
   }
 }
 
-export default withMobileDialog()(Login);
+export default Login;
