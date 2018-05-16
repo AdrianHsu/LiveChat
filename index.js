@@ -1,13 +1,13 @@
-var http = require('http');
+// curl -k https://localhost:8080/
+const https = require('https');
+const fs = require('fs');
 
-var server = http.createServer(function (req, res)  {
-    res.writeHead(200, {"Content-Type": "text/plain"});
-    res.end("Hello byron!\n");
-});
+const options = {
+    key: fs.readFileSync('/etc/nginx/ssl/cert.key'),
+    cert: fs.readFileSync('/etc/nginx/ssl/cert.pem')
+};
 
-var port = 8080;
-var hostname = '0.0.0.0';
-server.listen(port, hostname, () => {
-    console.log(`Server running at http://${hostname}:${port}/`);
-});
-
+https.createServer(options, (req, res) => {
+    res.writeHead(200);
+    res.end('hello world\n');
+}).listen(8080, '0.0.0.0');
