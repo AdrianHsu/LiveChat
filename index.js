@@ -3,8 +3,8 @@ const https = require('https');
 const fs = require('fs');
 
 const options = {
-    key: fs.readFileSync('/etc/nginx/ssl/cert.key'),
-    cert: fs.readFileSync('/etc/nginx/ssl/cert.pem')
+    key: fs.readFileSync('../cert.key'),
+    cert: fs.readFileSync('../cert.pem')
 };
 
 https.createServer(options, (req, res) => {
@@ -13,4 +13,6 @@ https.createServer(options, (req, res) => {
         res.write(data);
         res.end();
     });
-}).listen(8080, '0.0.0.0');
+}).listen(443, '0.0.0.0', function(){
+    console.log('listening on localhost 443');
+});

@@ -26,7 +26,7 @@
 
 
 * `127.0.0.1` is normally the IP address assigned to the "loopback" or local-only interface. This is a "fake" network adapter that can only communicate within the same host.
-*  when a server is told to listen on `0.0.0.0` that means "listen on every available ㄌnetwork interface". The loopback adapter with IP address `127.0.0.1` from the perspective of the server process looks just like any other network adapter on the machine, so a server told to listen on `0.0.0.0` will accept connections on that interface too.
+*  when a server is told to listen on `0.0.0.0` that means "listen on every available network interface". The loopback adapter with IP address `127.0.0.1` from the perspective of the server process looks just like any other network adapter on the machine, so a server told to listen on `0.0.0.0` will accept connections on that interface too.
 
 ## Main Feature
 
