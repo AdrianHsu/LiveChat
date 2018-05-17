@@ -6,13 +6,28 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import axios from 'axios';
 
 class Login extends React.Component {
+  
+  toggleLogin(e) {
+    axios.post('/user', {
+      account: 'b03901023',
+      password: 'hahaha'
+    })
+    .then(function (res) {
+      console.log(res);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });  
+  };
+
   render() {
     return (
       <Dialog 
         open 
-        onRequestClose={this.props.toggleLogin}
+        onRequestClose={this.toggleLogin}
         fullScreen={this.props.fullScreen}>
         <DialogTitle>登入</DialogTitle>
         <DialogContent>
@@ -37,13 +52,13 @@ class Login extends React.Component {
           />
         </DialogContent>
         <DialogActions>
-          <Button onClick={this.props.toggleLogin} color="secondary">
+          <Button onClick={this.toggleLogin} color="secondary">
             註冊
           </Button>
-          <Button onClick={this.props.toggleLogin} color="primary">
+          <Button onClick={this.toggleLogin} color="primary">
             訪客模式
           </Button>
-          <Button onClick={this.props.toggleLogin} color="primary">
+          <Button onClick={this.toggleLogin} color="primary">
             確認
           </Button>
         </DialogActions>
