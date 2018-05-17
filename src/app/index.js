@@ -6,6 +6,8 @@ import SignUp from './SignUp.js';
 import ListMessages from './ListMessages.js';
 import ButtonAppBar from './ButtonAppBar.js';
 import ChatroomPaper from './ChatroomPaper.js';
+import InputField from './InputField.js';
+import FriendTopBar from './FriendTopBar.js';
 
 import Grid from '@material-ui/core/Grid';
 
@@ -16,16 +18,18 @@ class App extends React.Component {
     // return <SignUp></SignUp>;
     return (
       <div>
-      <ButtonAppBar></ButtonAppBar>
+        <FriendTopBar></FriendTopBar>
+      <ChatroomPaper></ChatroomPaper>
+      <InputField></InputField>
 
-      <Grid container spacing={24}>
+      {/* <Grid container spacing={24}>
         <Grid item xs>
           <ListMessages></ListMessages>
         </Grid>
         <Grid item xs={9}>
           <p>3</p>
         </Grid>
-      </Grid>
+      </Grid> */}
     </div>);
   }
 }
