@@ -7,7 +7,7 @@ class FriendTopBar extends React.Component {
     return (
     <ThemeProvider>
       <AgentBar>
-      <Avatar imgUrl="https://livechat.s3.amazonaws.com/default/avatars/male_8.jpg" />
+      <Avatar imgUrl="img/ppl-3.jpg" />
       <Column>
         <Title>{'Jon Snow'}</Title>
         <Subtitle>{'Support hero'}</Subtitle>
