@@ -12,11 +12,16 @@ class Login extends React.Component {
   
   toggleLogin(e) {
     axios.post('/user', {
-      account: 'b03901023',
-      password: 'hahaha'
+      username: 'b03901023',
+      password: 'nanana',
+      updateTime: Date.now()
     })
     .then(function (res) {
-      console.log(res);
+      if(res.data._message == null) { // _message is ERROR message
+        console.log(res.data);
+      } else {
+        console.log(res.data._message);
+      }
     })
     .catch(function (error) {
       console.log(error);
