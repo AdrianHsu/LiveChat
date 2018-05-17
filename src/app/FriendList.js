@@ -32,7 +32,7 @@ class FriendList extends React.Component {
         </Column>
       </ChatListItem>
       <ChatListItem>
-        <Avatar imgUrl="img/ppl-3.jpg" />
+        <Avatar imgUrl="./assets/ppl-3.jpg" />
         <Column fill>
           <Row justify>
             <Title ellipsis>{'Michael'}</Title>

@@ -2,11 +2,11 @@
   "name": "chatroom",
   "version": "1.0.0",
   "description": "## Front-end Design: Material UI",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "webpack -d --watch",
-    "build": "webpack -p"
+    "dev": "webpack --watch --mode development",
+    "start": "nodemon server.js --exec babel-node server.js"
   },
   "repository": {
     "type": "git",
