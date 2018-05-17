@@ -15,7 +15,11 @@ var config = {
       {
         loader: 'babel-loader',
         test: /\.js$/, // regex, js or jsx
-        include: APP_DIR
+        include: APP_DIR,
+        exclude: '/node_modules',
+        options: {
+          presets: ["@babel/preset-env", "@babel/preset-react"]
+        }
       }
     ]
   }

@@ -9,18 +9,40 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import axios from 'axios';
 
 class Login extends React.Component {
+
+  constructor() {
+    super();
+    this.state = {
+      field_user: "",
+      field_pass: "",
+      error: 0
+    };
+  }
   
-  toggleLogin(e) {
+  handleChange = name => event => {
+    this.setState({
+      [name]: event.target.value,
+      error: 0
+    });
+  };
+
+  toggleLogin = e => {
+    const _self = this;
     axios.post('/user', {
-      username: 'b03901023',
-      password: 'nanana',
+      username: this.state.field_user,
+      password: this.state.field_pass,
       updateTime: Date.now()
     })
     .then(function (res) {
-      if(res.data._message == null) { // _message is ERROR message
+      if(res.data._message == null) { 
         console.log(res.data);
-      } else {
+      } else { // _message is ERROR message, error occurs!
         console.log(res.data._message);
+        _self.setState({
+          error: 1,
+          field_user: "",
+          field_pass: ""
+        });
       }
     })
     .catch(function (error) {
@@ -41,18 +63,24 @@ class Login extends React.Component {
           </DialogContentText>
           <TextField
             autoFocus
+            error={this.state.error}
             margin="dense"
-            id="name"
+            id="username"
             label="帳號"
-            type="account"
+            type="username"
+            value={this.state.field_user}
+            onChange={this.handleChange('field_user')}
             fullWidth
           />
           <TextField
             autoFocus
+            error={this.state.error}
             margin="dense"
-            id="name"
+            id="password"
             label="密碼"
             type="password"
+            value={this.state.field_pass}
+            onChange={this.handleChange('field_pass')}
             fullWidth
           />
         </DialogContent>

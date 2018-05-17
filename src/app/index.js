@@ -15,7 +15,7 @@ class App extends React.Component {
     super(props);
   }
   render() {
-    return <Login></Login>;
+  return (<Login></Login>);
     // return <ChatLayout></ChatLayout>;
   }
 }
