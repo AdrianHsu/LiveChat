@@ -25,44 +25,21 @@ class Login extends React.Component {
       error: 0
     });
   };
-  toggleLoginHash = e => {
-    const name = "0000"; //Math.random().toString(36).substr(2, 5);
-    const pass = Math.random().toString(36).substr(2, 5);
-    const _self = this;
-    axios.post('/user', {
-      username: name,
-      password: pass,
-      updateTime: Date.now()
-    })
-    .then(function (res) {
-      if(res.data._message == null) { 
-        console.log(res.data);
-      } else { // _message is ERROR message, error occurs!
-        console.log(res.data._message);
-        _self.setState({
-          error: 1,
-          field_user: "",
-          field_pass: ""
-        });
-      }
-    })
-    .catch(function (error) {
-      console.log(error);
-    });  
-  };
   toggleLogin = e => {
 
     const _self = this;
-    axios.post('/user', {
+    // Math.random().toString(36).substr(2, 5);
+    axios.post('/user/login', {
       username: this.state.field_user,
       password: this.state.field_pass,
       updateTime: Date.now()
     })
     .then(function (res) {
-      if(res.data._message == null) { 
+      if(res.data != 'not found') { // no error
         console.log(res.data);
+        window.location = '/chatroom';
       } else { // _message is ERROR message, error occurs!
-        console.log(res.data._message);
+        console.log(res.data);
         _self.setState({
           error: 1,
           field_user: "",
@@ -73,7 +50,19 @@ class Login extends React.Component {
     .catch(function (error) {
       console.log(error);
     });  
+
   };
+
+  signUpPage = e => {
+    axios.get('/redirect?page=signup')
+    .then(function (res) {
+      console.log(res);
+      window.location = '/signup';
+    })
+    .catch(function (error) {
+      console.log(error);
+    });  
+  }
 
   render() {
     return (
@@ -110,11 +99,8 @@ class Login extends React.Component {
           />
         </DialogContent>
         <DialogActions>
-          <Button onClick={this.toggleLogin} color="secondary">
+          <Button onClick={this.signUpPage} color="secondary">
             註冊
-          </Button>
-          <Button onClick={this.toggleLoginHash} color="primary">
-            訪客模式
           </Button>
           <Button onClick={this.toggleLogin} color="primary">
             確認
