@@ -15,14 +15,21 @@ class SignUp extends React.Component {
     this.state = {
       field_user: "",
       field_pass: "",
-      error: 0
+      error: false
     };
   }
-  
+  componentWillMount = () => {
+    console.log("componentWillMount()");
+    var retrievedObject = localStorage.getItem('userInfo');
+    if(retrievedObject != null) {
+      window.alert(retrievedObject + '\n您已經登入，重新導向至聊天室...');
+      window.location = '/chatroom';
+    }
+  };
   handleChange = name => event => {
     this.setState({
       [name]: event.target.value,
-      error: 0
+      error: false
     });
   };
 
@@ -38,11 +45,13 @@ class SignUp extends React.Component {
     .then(function (res) {
       if(res.data._message == null) { // no error
         console.log(res.data);
+        window.alert(res.data + '\n註冊成功！');
         _self.loginPage();
       } else { // _message is ERROR message, error occurs!
         console.log(res.data._message);
+        window.alert(res.data._message);
         _self.setState({
-          error: 1,
+          error: true,
           field_user: "",
           field_pass: ""
         });

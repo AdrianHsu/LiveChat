@@ -1,7 +1,5 @@
 import React from 'react';
 import {render} from 'react-dom';
-import Login from './Login.js';
-import SignUp from './SignUp.js';
 
 import FriendList from './FriendList';
 import ButtonAppBar from './ButtonAppBar.js';
@@ -11,9 +9,19 @@ import FriendTopBar from './FriendTopBar.js';
 import Grid from '@material-ui/core/Grid';
 
 class ChatLayout extends React.Component {
+  
+  componentWillMount = () => {
+    console.log("componentWillMount()");
+    var retrievedObject = localStorage.getItem('userInfo');
+    if(retrievedObject == null) {
+      window.alert('登入無效，請重新登入！');
+      window.location = '/login';
+    } else {
+      // window.alert(retrievedObject + '\n登入成功！');  
+    }
+  };
+
   render() {
-    // return <Login></Login>;
-    // return <SignUp></SignUp>;
     return (
       <div>
       <Grid container spacing={24}>

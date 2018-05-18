@@ -59,7 +59,8 @@ app.post('/user/login', function (req, res) {
         password: req.body.password,
         updateTime: req.body.updateTime
     });
-    userModel.find({ 'username': newUser.username,'password': newUser.password }, function(err, user) {
+    userModel.find({ 'username': newUser.username,
+        'password': newUser.password }, function(err, user) {
         
         if(err){ 
             console.log(err); 
