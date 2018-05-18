@@ -9,37 +9,15 @@ class FriendList extends React.Component {
     return (
       <ThemeProvider>
       <ChatList>
-      <ChatListItem>
-        <Avatar letter="K" />
-        <Column fill>
-          <Row justify>
-            <Title ellipsis>{'Konrad'}</Title>
-            <Subtitle nowrap>{'14:31 PM'}</Subtitle>
-          </Row>
-          <Subtitle ellipsis>
-            {'Hello, how can I help you? We have a lot to talk about'}
-          </Subtitle>
-        </Column>
-      </ChatListItem>
       <ChatListItem active>
-        <Avatar letter="J" />
+        <Avatar imgUrl="./assets/bot.png" />
         <Column fill>
           <Row justify>
-            <Title ellipsis>{'Andrew'}</Title>
-            <Subtitle nowrap>{'14:31 PM'}</Subtitle>
-          </Row>
-          <Subtitle ellipsis>{'actually I just emailed you back'}</Subtitle>
-        </Column>
-      </ChatListItem>
-      <ChatListItem>
-        <Avatar imgUrl="./assets/ppl-3.jpg" />
-        <Column fill>
-          <Row justify>
-            <Title ellipsis>{'Michael'}</Title>
+            <Title ellipsis>{'Chatbot'}</Title>
             <Subtitle nowrap>{'14:31 PM'}</Subtitle>
           </Row>
           <Subtitle ellipsis>
-            {"Ok, thanks for the details, I'll get back to you tomorrow."}
+            {"干我屁事"}
           </Subtitle>
         </Column>
       </ChatListItem>

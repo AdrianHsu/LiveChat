@@ -17,7 +17,8 @@ class ChatLayout extends React.Component {
       window.alert('登入無效，請重新登入！');
       window.location = '/login';
     } else {
-      // window.alert(retrievedObject + '\n登入成功！');  
+      // window.alert(retrievedObject + '\n登入成功！');
+      console.log(retrievedObject);  
     }
   };
 

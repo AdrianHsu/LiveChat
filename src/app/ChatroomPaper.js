@@ -7,21 +7,30 @@ class ChatroomPaper extends React.Component {
     return (
     <ThemeProvider>
     <MessageList active>
-      <MessageGroup>
-        <Message date="21:38" authorName="Jon Smith">
-          <MessageText>Hi! I would like to buy those shoes</MessageText>
+      <MessageGroup
+        onlyFirstWithMeta
+      >
+        <Message avatarUrl='./assets/bot.png' date="21:38" authorName="Chatbot">
+          <MessageText>干你屁事干你屁事干你屁事干你屁事干你屁事</MessageText>
+        </Message>
+        <Message avatarUrl='./assets/bot.png' date="21:38" authorName="Chatbot">
+          <MessageText>干我屁事</MessageText>
         </Message>
       </MessageGroup>
       <MessageGroup onlyFirstWithMeta>
-        <Message date="21:38" isOwn={true} authorName="Visitor">
-          <MessageText>
-            I love them
-            so
-            much!
-          </MessageText>
+        <Message avatarUrl='./assets/me.png' date="21:38" isOwn={true} authorName="鈞">
+          <MessageText>Test</MessageText>
         </Message>
-        <Message date="21:38" isOwn={true} authorName="Visitor">
+        <Message avatarUrl='./assets/me.png' date="21:38" isOwn={true} authorName="鈞">
           <MessageText>This helps me a lot</MessageText>
+        </Message>
+      </MessageGroup>
+      <MessageGroup onlyFirstWithMeta>
+        <Message avatarUrl='./assets/bot.png' date="21:38" authorName="Chatbot">
+          <MessageText>干你屁事</MessageText>
+        </Message>
+        <Message avatarUrl='./assets/bot.png' date="21:38" authorName="Chatbot">
+          <MessageText>干我屁事</MessageText>
         </Message>
       </MessageGroup>
     </MessageList>

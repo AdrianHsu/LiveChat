@@ -7,10 +7,10 @@ class FriendTopBar extends React.Component {
     return (
     <ThemeProvider>
       <AgentBar>
-      <Avatar imgUrl="./assets/ppl-3.jpg" />
+      <Avatar imgUrl="./assets/bot.png" />
       <Column>
-        <Title>{'Jon Snow'}</Title>
-        <Subtitle>{'Support hero'}</Subtitle>
+        <Title>{'Chatbot'}</Title>
+        <Subtitle>{'電機系畢業，一個厭世的聊天機器人'}</Subtitle>
       </Column>
     </AgentBar>
     </ThemeProvider>);
