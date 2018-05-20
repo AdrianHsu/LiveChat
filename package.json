@@ -1,7 +1,7 @@
 {
   "name": "chatroom",
   "version": "1.0.0",
-  "description": "## Front-end Design: Material UI",
+  "description": "## chat room",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -14,7 +14,7 @@
     "url": "git+https://github.com/AdrianHsu/chatroom.git"
   },
   "author": "adrianhsu",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/AdrianHsu/chatroom/issues"
   },

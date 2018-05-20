@@ -1,70 +1,257 @@
 # chatroom
 
-## Front-end Design: Material UI
-
-[https://www.material-ui.com/#/](https://www.material-ui.com/#/)
+> 🏃 Let's chat with your friends.
 
 
-## chat-room tutorial
-[https://www.yumingyuan.me/2017/02/13/chatroom-developed-using-react-socketio-and-express.html](https://www.yumingyuan.me/2017/02/13/chatroom-developed-using-react-socketio-and-express.html)
-
-## NPM, Webpack, React tutorial (very helpful!!)
-[https://www.yumingyuan.me/2017/02/06/Getting-Started-With-Reactjs-Using-Npm-Webpack.html](https://www.yumingyuan.me/2017/02/06/Getting-Started-With-Reactjs-Using-Npm-Webpack.html)
-
-## Webpack-dev-server + react-hot-loader
-
-* 沒有成功把 react-hot-loader 裝起來
-* 有成功把 webpack-dev-server 的 LiveReload 弄起來了
-* [https://rhadow.github.io/2015/04/02/webpack-workflow/](https://rhadow.github.io/2015/04/02/webpack-workflow/)
-
-## 解決 mongoose 的 `connect()` 只能連一個 db
-
-* [http://jayceefun.github.io/blog/2013/08/27/mongoose_multi_dbs/](http://jayceefun.github.io/blog/2013/08/27/mongoose_multi_dbs/)
-
-## 127.0.0.1 v.s. 0.0.0.0
-
-[https://stackoverflow.com/questions/20778771/what-is-the-difference-between-0-0-0-0-127-0-0-1-and-localhost](https://stackoverflow.com/questions/20778771/what-is-the-difference-between-0-0-0-0-127-0-0-1-and-localhost)
+<p align=center>
+<a target="_blank" href="https://npmjs.org/package/life-commit" title="NPM version"><img src="https://img.shields.io/npm/v/life-commit.svg"></a><a target="_blank" href="http://nodejs.org/download/" title="Node version"><img src="https://img.shields.io/badge/node.js-%3E=_6.0-green.svg"></a><a target="_blank" href="https://opensource.org/licenses/MIT" title="License: MIT"><img src="https://img.shields.io/badge/License-MIT-blue.svg"></a><a target="_blank" href="http://makeapullrequest.com" title="PRs Welcome"><img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg"></a>
+</p>  
 
 
 
-* `127.0.0.1` is normally the IP address assigned to the "loopback" or local-only interface. This is a "fake" network adapter that can only communicate within the same host.
-*  when a server is told to listen on `0.0.0.0` that means "listen on every available network interface". The loopback adapter with IP address `127.0.0.1` from the perspective of the server process looks just like any other network adapter on the machine, so a server told to listen on `0.0.0.0` will accept connections on that interface too.
+
+- Front-end Framework: **React, React-dom**
+- Front-end Ajax communication: **axios, socket.io-client**
+- Front-end Web RWD Design: **Material-ui, livechat-ui**
+- Back-end: **Node.js, Express.js, Socket.io**
+- Database: **Mongoose, MongoDB**
+- Bundle: **Webpack, Babel**
+
+
+
+## How-to
+
+```Shell
+$ npm install 
+$ npm run build
+$ npm start 
+
+# please check: http://localhost:3000/
+```
+
+
+
+## Directory Tree
+
+```
+$ tree
+.
+├── README.md
+├── package-lock.json
+├── package.json
+├── public
+│   ├── assets/
+│   ├── chatroom.html
+│   ├── login.html
+│   └── signup.html
+├── server.js
+├── src
+│   ├── app
+│   │   ├── ButtonAppBar.js
+│   │   ├── ChatGridLayout.js
+│   │   ├── ChatRoomLayout.js
+│   │   ├── ChatroomPaper.js
+│   │   ├── ContactList.js
+│   │   ├── InputBox.js
+│   │   ├── Login.js
+│   │   ├── SignUp.js
+│   │   ├── index_chatroom.js
+│   │   ├── index_login.js
+│   │   └── index_signup.js
+│   ├── models
+│   │   ├── Message.js
+│   │   └── User.js
+│   └── socket
+│       ├── MessageSocket.js
+│       └── UserSocket.js
+└── webpack.config.js
+
+6 directories, 34 files
+```
+
+
+
+## Screenshot
+
+1. Login Page: [http://localhost:3000/login](http://localhost:3000/login)
+
+![login](img/login.png)
+
+2. Sign Up Page: [http://localhost:3000/signup](http://localhost:3000/signup)
+
+![signup](img/signup.png)
+
+3. Chat room: [http://localhost:3000/chatroom](http://localhost:3000/chatroom)
+
+![chat](./img/chat1.png)
+
+
+
+4. Chat room (when someone send you messages)
+
+![chat](./img/chat2.png)
+
+5. Server Logs
+
+```Shell
+received msg: { _id: 5b017a061a6ce3730da9a0ab,
+  from: '許秉鈞', # I send messages
+  to: 'a',
+  msg: 'More than ever Hour after Our work is Never over',
+  time: '21:37:10',
+  timestamp: '1526823430410',
+  __v: 0 }
+received msg: { _id: 5b017a721a6ce3730da9a0ac,
+  from: 'b', # someone send me messages
+  to: '許秉鈞',
+  msg: 'Socket io 真的太厲害 (´・ω・`)',
+  time: '21:38:58',
+  timestamp: '1526823538640',
+  __v: 0 }
+```
+
+
+
+## Dependencies
+
+* Front-end Framework: **React, React-dom**
+* Front-end Ajax communication: **axios, socket.io-client**
+* Front-end Web RWD Design: **Material-ui, livechat-ui**
+* Back-end: **Node.js, Express.js, Socket.io**
+* Database: **Mongoose, MongoDB**
+* Bundle: **Webpack, Babel**
+
+
+
+```
+"dependencies": {
+    "@babel/cli": "^7.0.0-beta.47",
+    "@babel/core": "^7.0.0-beta.47",
+    "@babel/plugin-proposal-class-properties": "^7.0.0-beta.47",
+    "@babel/preset-env": "^7.0.0-beta.47",
+    "@babel/preset-react": "^7.0.0-beta.47",
+    "@livechat/ui-kit": "^0.1.0",
+    "@material-ui/core": "^1.0.0-rc.1",
+    "@material-ui/icons": "^1.0.0-rc.0",
+    "axios": "^0.18.0",
+    "babel-loader": "^8.0.0-beta.2",
+    "body-parser": "^1.18.3",
+    "express": "^4.16.3",
+    "material-ui": "^0.20.1",
+    "mongo": "^0.1.0",
+    "mongoose": "^5.1.1",
+    "mongoose-unique-validator": "^2.0.1",
+    "react": "^16.3.2",
+    "react-dom": "^16.3.2",
+    "socket.io": "^2.1.1",
+    "socket.io-client": "^2.1.1",
+    "typeface-roboto": "0.0.54",
+    "webpack": "^4.8.3",
+    "webpack-cli": "^2.1.3"
+  }
+```
+
+
+
+
+
+## Database
+
+* MongoDB + Mongoose
+* `mongoose-unique-validator` to check if the username is already used
+* you can download the package through `npm install -S mongoose-unique-validator`
+
+
+
+#### UserSchema
+
+```javascript
+const userSchema = mongoose.Schema({
+  username: { type: String, required: true, unique: true }, # 許秉鈞
+  password: { type: String, required: true }, # hihi
+  icon: {type: String, required: true}, # './assets/default.png'
+  updateTime: Date # ISODate("2018-05-20T08:41:18Z")
+});
+userSchema.plugin(uniqueValidator); # check username is unique
+```
+
+
+
+#### MessageSchema
+
+```Javascript
+const messageSchema = mongoose.Schema({
+    from: String, # 許秉鈞
+    to: String, # 許秉倫
+    msg: String, # "How is your mid-term exam?"
+    time: String, # "20:23:27" 
+    timestamp: String # "1526819007387"
+});
+```
+
+## Known Issues
+
+1. When running the command  `npm run build` ，it generates some warnings shown below (but they has no effect on the compile process, so please just ignore them!)
+
+![build](img/build.png)
+
+2. **[IMPORTANT]** I didn't encrypt the password, and it's very dangerous.
+
+![e](img/encrypt.png)
+
+
+
+## License
+
+MIT License
+
+
 
 ## Main Feature
 
-- 聯絡人列表
-  - 顯示所有可聊天的對象
-  - 只要是註冊在 database 的用戶，都可以跟所有對象互相聊天
-  - 目前對話者的欄位需要重點標示
-- 目前對話者
-  - 將目前對話者的名稱顯示在上方
-- 對話框
-  - 依據新舊排序訊息內容
-  - 越新的訊息越下面
-  - 訊息、時間
-  - 自己是右側、對方是左側
-  - 傳訊息的音效、收到訊息的音效
-  - 顯示：正在輸入訊息...
-- 文字輸入框
-  - 送出 按鈕
-- 在最上方顯示自己的頭貼、名字（無法修改，直接沿用 github）
-- 支援一對一對話
-  - 要能夠開兩個視窗對話，且標題為目前聊天對象的名字
-- 註冊方式有二：Github 註冊、帳號密碼註冊
-  - Github 則直接登入
-  - 帳號密碼登入、不可修改（避免聊天資料轉移失敗）
-- Github 頭貼（不可修改）、匿名帳號頭貼上傳（可修改）
-- 訊息通知（已讀，紅點點）
-  - 當 A 用戶傳訊息給 B 時，假設 B 此時並不在此對話框，則聯絡人列表顯示紅點點（訊息數）
-- MongoDB database
-- Material UI
-- 後端 log：只要有人互傳訊息， server 就印出 log，方便檢查
+- Contact List
+  - Show all Friends in the database who you could chat with
+  - Once the particular user has been signed up, anyone could chat with him/her
+  - highlight the friend who you're chat with
+- Current friend you're chatting with
+  - print the friend name and friend icon on the top bar
+- Chatroom Layout
+  - sort the messages by their timestamp
+  - the newest message will be put in the button
+  - print out the message, time, and name
+  - messages from self will be on the right; messages from friends will be on the left
+- Input text box
+  - send button
+  - key press "enter" will send also
+  - prevent from sending empty message
+- show username on the top bar (pink color bar), and also the **document title**
+- support one-to-one messaging
+  - open 2 pages in your browser, and you can use different users to chat to each other
+- sign up: username + password
+  - username is **unique**, so the name and socket id are mapped 1-to-1
+  - password is not encryted, see **known issues**
+- default user icon (yellow smile face)
+- Logout button
+- message notification (red badges)
+  - When user A sending messages to user B, and user B is chatting with user C, for example, then the user B will get a notification from user A (red badges)
+  - notification number will also be shown
+- MongoDB database: `messagesdb`
+  - there are 2 collections in this database: `User` and `Message`
+- Supporting Front-end design frameworks: 
+  - [Material UI](https://material-ui-next.com/)
+  - [React chat ui kit](https://docs.livechatinc.com/react-chat-ui-kit)
+- Back-end logging
+  - if someone are chatting, the server will print out those messages passing through
+- built-in Emoji
+
+
 
 ## To-do
 
-1. 表情符號
-2. 上傳照片
-3. 多人聊天
-4. 刪除訊息
-5. Chatbot
-6. 搜尋訊息
+1. upload images, videos
+2. upload user icons
+3. delete messages
+4. Chatbot
+5. search for messages
+6. showing that someone is texting
+7. Facebook or github login
