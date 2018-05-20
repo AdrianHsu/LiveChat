@@ -24,7 +24,7 @@
 ```Shell
 $ npm install 
 $ npm run build
-$ npm start 
+$ npm run start 
 
 # demo page: http://localhost:3000/
 ```
@@ -91,7 +91,13 @@ $ tree
 
 ![chat](./img/chat2.png)
 
-5. Server Logs
+5. RWD web design (compatible with iPhone 6/7 and android)
+
+| mobile_1.png            | mobile_2.png            |
+| ----------------------- | ----------------------- |
+| ![](./img/mobile_1.png) | ![](./img/mobile_2.png) |
+
+6. Server Logs
 
 ```Shell
 received msg: { _id: 5b017a061a6ce3730da9a0ab,
