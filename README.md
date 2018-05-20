@@ -50,7 +50,7 @@ $ tree
 │   │   ├── ButtonAppBar.js
 │   │   ├── ChatGridLayout.js
 │   │   ├── ChatRoomLayout.js
-│   │   ├── ChatroomPaper.js
+│   │   ├── ChatRoomPaper.js
 │   │   ├── ContactList.js
 │   │   ├── InputBox.js
 │   │   ├── Login.js
