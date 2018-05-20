@@ -3,7 +3,6 @@ const app = express();
 // var http = require('http').Server(app);
 var https = require('https');
 var fs = require('fs'); // new!
-var io = require('socket.io')(https);
 var path = require('path');
 var webpack = require('webpack');
 var bodyParser = require('body-parser');
@@ -14,7 +13,13 @@ const userSocket = new UserSocket(con);
 const MsgSocket = require('./src/socket/MessageSocket.js');
 const msgSocket = new MsgSocket(con);
 
-const port = 3000;
+const options = {
+
+    key: fs.readFileSync('/etc/nginx/ssl/cert.key'),
+    cert: fs.readFileSync('/etc/nginx/ssl/cert.pem')
+};
+var httpsServer = https.createServer(options, app).listen(8080, '0.0.0.0');
+var io = require('socket.io').listen(httpsServer);
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -119,9 +124,4 @@ io.on('connection', (socket) => {
     });
 });
 
-const options = {
-    key: fs.readFileSync('/etc/nginx/ssl/cert.key'),
-    cert: fs.readFileSync('/etc/nginx/ssl/cert.pem')
-};
 
-var httpsServer = https.createServer(options, app).listen(8080, '0.0.0.0');
