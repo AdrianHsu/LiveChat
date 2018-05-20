@@ -5,8 +5,7 @@ var User = null;
 
 class UserSocket {
 
-    constructor() {
-        var con = mongoose.createConnection('mongodb://localhost/userdb');
+    constructor(con) {
         User = con.model('User', UserSchema);
     }
 

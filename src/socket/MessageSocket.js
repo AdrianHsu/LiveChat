@@ -5,8 +5,7 @@ var Message = null;
 
 class MessageSocket {
 
-    constructor() {
-        var con = mongoose.createConnection('mongodb://localhost/messagedb');
+    constructor(con) {
         Message = con.model('Message', MessageSchema);
     }
 
@@ -19,6 +18,7 @@ class MessageSocket {
             msg: data.msg,
             time: data.time
         });
+        
         newMessage.save(function(err, data){
             if(err){ 
                 console.log(err); 
