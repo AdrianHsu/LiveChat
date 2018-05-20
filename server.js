@@ -67,7 +67,7 @@ app.get('/user/myicon', function(req, res) {
 
 app.get('/user/allusers', function(req, res){
     const me = req.query.username;
-    userSocket.sendFriendList(me, res);
+    userSocket.loadFriendList(me, res);
 });
 app.get('/msg/both', function(req, res) {
     const me = req.query.username;

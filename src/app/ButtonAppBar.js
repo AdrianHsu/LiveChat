@@ -25,6 +25,13 @@ class ButtonAppBar extends React.Component {
   constructor(props) {
     super(props);
   }
+  logout = e => {
+    var retrievedObject = sessionStorage.clear();
+    if(retrievedObject == null) {
+      window.alert('正在登出...');
+      window.location = '/login';
+    }
+  }
   render() {
     const { classes } = this.props;
     return (
@@ -37,7 +44,7 @@ class ButtonAppBar extends React.Component {
             <Typography variant="title" color="inherit" className={classes.flex}>
               {this.props.username}
             </Typography>
-            <Button color="inherit">登出</Button>
+            <Button color="inherit" onClick={e => this.logout(e)}>登出</Button>
           </Toolbar>
         </AppBar>
       </div>

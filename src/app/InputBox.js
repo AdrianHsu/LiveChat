@@ -55,6 +55,9 @@ class InputBox extends React.Component {
 
   render() {
     const { classes } = this.props;
+    if(this.props.pickFriendBoolean === false) {
+      return null;
+    }
     return (
       <Grid container className={classes.root} spacing={24}>
       <Grid item sm={10}>

@@ -38,6 +38,9 @@ class ChatRoomLayout extends React.Component {
     this.socket.on('message', (msg) => {
       var item = {};
       msg = JSON.parse(msg);
+      item.msg = msg.msg;
+      item.time = msg.time;
+      item.toName = msg.to;
       if(msg.from === this.props.username){
         item.avatarUrl = this.props.icon;
         item.authorName = this.props.username;
@@ -46,16 +49,19 @@ class ChatRoomLayout extends React.Component {
         item.avatarUrl = this.props.friendicon;
         item.authorName = this.props.friendname;
         item.isOwn = false;
-      } else {
+      } else { // other friends send messages!
+        item.otherFriendName = msg.from;
+        this.addNotifCallback(item);
         return null;
       }
-      item.msg = msg.msg;
-      item.time = msg.time;
       this.addMsgCallback(item);
     });
   }
   addMsgCallback = (item) => {
     this.props.addMsgCallback(item);
+  }
+  addNotifCallback = (item) => {
+    this.props.addNotifCallback(item);
   }
 
   sendMsgCallback = msg => {
@@ -78,7 +84,7 @@ class ChatRoomLayout extends React.Component {
               <Avatar src={this.props.friendicon} />
             }
             title={this.props.friendname}
-            subheader="電機系畢業，一個厭世的聊天機器人"
+            subheader={this.props.subheader}
           />
           <CardContent>
             <ChatRoomPaper 
@@ -88,7 +94,7 @@ class ChatRoomLayout extends React.Component {
             />
           </CardContent>
           <CardActions>
-            <InputBox sendMsgCallback={this.sendMsgCallback}/>
+            <InputBox sendMsgCallback={this.sendMsgCallback} pickFriendBoolean={this.props.pickFriendBoolean}/>
           </CardActions>
         </Card>
     );

@@ -20,9 +20,12 @@ class ChatGridLayout extends React.Component{
     this.state = ({
       username: "",
       icon: "",
-      friendname: "chatbot",
+      friendname: "聊天室機器人",
       friendicon: "./assets/bot.png",
-      messageList: []
+      subheader: "請選擇您要聊天的對象～",
+      messageList: [],
+      friendList: [],
+      pickFriendBoolean: false
     });
     
   }
@@ -52,22 +55,91 @@ class ChatGridLayout extends React.Component{
       .catch(function (error) {
         console.log(error);
       });  
+
+      axios.get('/user/allusers', {
+        params: {
+          username: retrievedObject.username
+        }
+      })
+      .then( (res) => {
+        // console.log(res['data']);
+        for(var i = 0; i < res['data'].length; i++) {
+          var friend = JSON.parse(res['data'][i]);
+          this.setState({
+            friendList: this.state.friendList.concat(friend),
+          });
+        }
+        // this.forceUpdate();
+      })
+      .catch(function (error) {
+        console.log(error);
+      });  
+
     }
   }
   addMsgCallback = (item) => {
+    let tmp = this.state.friendList.slice(); 
+    for(var i = 0; i < tmp.length; i++) {
+      if(tmp[i].friendname === item.authorName) {
+        tmp[i].lastMsg = item.msg + ' (' + item.time + ')';
+        // tmp[i].notifNum += 1;
+        this.setState({friendList: tmp}, () => {
+          // console.log(this.state.friendList);
+        });
+        break;
+      } else if(tmp[i].friendname === item.toName) {
+        tmp[i].lastMsg = '我: ' + item.msg + ' (' + item.time + ')';
+        // tmp[i].notifNum += 1;
+        this.setState({friendList: tmp}, () => {
+          // console.log(this.state.friendList);
+        });
+        break;
+      }
+    }
+    
     this.setState({
       messageList: this.state.messageList.concat(item)
     }, () => {
       // console.log(this.state.messageList);
     });
   }
+  addNotifCallback = (item) => {
+    let tmp = this.state.friendList.slice(); 
+    for(var i = 0; i < tmp.length; i++) {
+      if(tmp[i].friendname === item.otherFriendName) {
+        tmp[i].lastMsg = item.msg + ' (' + item.time + ')';
+        tmp[i].notifNum += 1;
+        this.setState({friendList: tmp}, () => {
+          // console.log(this.state.friendList);
+        });
+        break;
+      }
+    }
+  }
+
+  clearNotifCallback = (friendname) => {
+    let tmp = this.state.friendList.slice(); 
+    for(var i = 0; i < tmp.length; i++) {
+      if(tmp[i].friendname === friendname) {
+        tmp[i].notifNum = 0;
+        this.setState({friendList: tmp}, () => {
+          // console.log(this.state.friendList);
+        });
+        break;
+      }
+    }
+  }
 
   pickFriendCallback = (e, name, icon) => {
     this.setState({
       friendname: name,
       friendicon: icon,
-      messageList: []
+      messageList: [],
+      pickFriendBoolean: true,
+      subheader: "在聊天室上線中"
     }, () => {
+      this.clearNotifCallback(name);
+
       axios.get('/msg/both', {
         params: {
           username: this.state.username,
@@ -95,7 +167,7 @@ class ChatGridLayout extends React.Component{
           this.setState({
             messageList: this.state.messageList.concat(item)
           }, () => {
-            console.log(this.state.messageList);
+            // console.log(this.state.messageList);
           });
         }
       })
@@ -117,13 +189,15 @@ class ChatGridLayout extends React.Component{
         <ButtonAppBar username={this.state.username}/>
       <Grid container className={classes.root} spacing={24}>
       <Grid item xs={8} sm={3}>
-      <ContactList username={this.state.username}
+      <ContactList username={this.state.username} friendList={this.state.friendList}
         pickFriendCallback={this.pickFriendCallback}></ContactList>
       </Grid>
       <Grid item xs={12} sm={9}>
       <ChatRoomLayout className={classes.paper} username={this.state.username}
-        friendname={this.state.friendname} friendicon={this.state.friendicon} 
-        icon={this.state.icon} messageList={this.state.messageList} addMsgCallback={this.addMsgCallback}/>
+        friendname={this.state.friendname} friendicon={this.state.friendicon} subheader={this.state.subheader}
+        icon={this.state.icon} messageList={this.state.messageList}  pickFriendBoolean={this.state.pickFriendBoolean}
+        addMsgCallback={this.addMsgCallback} addNotifCallback={this.addNotifCallback}
+        />
       </Grid>
       </Grid>
       </div>

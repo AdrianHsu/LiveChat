@@ -32,31 +32,18 @@ const styles = theme => ({
   },
 });
 
+function NotifBadge(props) {
+  if(props.notifNum === 0) {
+    return null;
+  }
+  return <Badge color="secondary" badgeContent={props.notifNum} ></Badge>;
+}
+
 class ContactList extends React.Component {
   constructor(props) {
     super(props);
-    this.friendList = []; // doesn't need to be "state"
   }
-  componentWillMount = () => {
-    var _self = this;
-    axios.get('/user/allusers', {
-      params: {
-        username: this.props.username
-      }
-    })
-    .then(function (res){
-      // console.log(res['data']);
-      for(var i = 0; i < res['data'].length; i++) {
-        var friend = JSON.parse(res['data'][i]);
-        _self.friendList.push(friend);
-      } 
-      _self.forceUpdate();
-      // console.log(_self.friendList);
-    })
-    .catch(function (error) {
-      console.log(error);
-    });  
-  };
+
   pickFriendCallback = (e, name, icon) => {
     e.preventDefault();
     this.props.pickFriendCallback(e, name, icon);
@@ -64,15 +51,14 @@ class ContactList extends React.Component {
 
   render() {
     const { classes } = this.props;
-
-    var listItems = this.friendList.map(item => (
+    var listItems = this.props.friendList.map(item => (
       <ListItem button divider
       key={item.friendname}
       onClick={(e) => this.pickFriendCallback(e, item.friendname, item.icon)}
       >
       <Avatar src={item.icon} />
-      <ListItemText primary={item.friendname} secondary="干你屁事" />
-      <Badge color="secondary" badgeContent={0} className={classes.margin}></Badge>
+      <ListItemText primary={item.friendname} secondary={item.lastMsg} />
+      <NotifBadge notifNum={item.notifNum}/>
       </ListItem> 
     ));
     return (

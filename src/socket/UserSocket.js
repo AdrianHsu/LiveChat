@@ -2,7 +2,6 @@ const UserSchema = require('../models/User.js');
 const mongoose = require('mongoose');
 
 var User = null;
-
 class UserSocket {
 
     constructor(con) {
@@ -58,13 +57,13 @@ class UserSocket {
             res.send(icon);
         });
     };
-    sendFriendList(me, res) {
+    loadFriendList(me, res) {
         User.find({}, function(err, users) {
             var arr = [];
             for(var i = 0; i < users.length; i++) {
                 if(users[i]['username'] != me) {
                     var obj = JSON.stringify({friendname: users[i]['username'],
-                        icon: users[i]['icon']});
+                        icon: users[i]['icon'], lastMsg: '...', notifNum: 0});
                     arr.push(obj);
                 }
             }
