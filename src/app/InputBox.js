@@ -38,7 +38,7 @@ class InputBox extends React.Component {
     e.preventDefault();
     const msg = this.state.msg;
     if (msg.length === 0) {
-      alert("string length must > 0");
+      // alert("string length must > 0");
       return;
     }
     // console.log(this.state.msg);
