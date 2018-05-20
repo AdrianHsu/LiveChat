@@ -26,7 +26,7 @@ $ npm install
 $ npm run build
 $ npm start 
 
-# please check: http://localhost:3000/
+# demo page: http://localhost:3000/
 ```
 
 
