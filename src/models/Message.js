@@ -7,4 +7,4 @@ const messageSchema = mongoose.Schema({
     time: String
 });
 
-module.exports = mongoose.model('Message', messageSchema);
+module.exports = messageSchema;

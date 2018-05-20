@@ -1,30 +1,33 @@
-const Message = require('../models/Message.js');
+const MessageSchema = require('../models/Message.js');
+const mongoose = require('mongoose');
+
+var Message = null;
 
 class MessageSocket {
 
     constructor() {
-        this.db;
-    }
-
-    connect() {
-        this.db = require('mongoose').connect('mongodb://localhost:27017/chat');
-        this.db.Promise = global.Promise;
-    }
-
-    getMessages() {
-        return Message.find();
+        var con = mongoose.createConnection('mongodb://localhost/messagedb');
+        Message = con.model('Message', MessageSchema);
     }
 
     storeMessages(data) {
 
         console.log(data);
-        const newMessage = new Message({
-            name: data.name,
+        var newMessage = new Message({
+            from: data.from,
+            to: data.to,
             msg: data.msg,
-            time: Date()
+            time: data.time
         });
-        const doc = newMessage.save();
+        newMessage.save(function(err, data){
+            if(err){ 
+                console.log(err); 
+            }
+            else{
+                console.log(data);
+            } 
+        });
     }
 }
 
-module.exports = SocketHander;
+module.exports = MessageSocket;

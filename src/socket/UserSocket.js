@@ -1,11 +1,13 @@
-const User = require('../models/User.js');
+const UserSchema = require('../models/User.js');
 const mongoose = require('mongoose');
+
+var User = null;
 
 class UserSocket {
 
     constructor() {
-        mongoose.Promise = global.Promise;
-        mongoose.connect('mongodb://localhost:27017/userdb');
+        var con = mongoose.createConnection('mongodb://localhost/userdb');
+        User = con.model('User', UserSchema);
     }
 
     storeUsers(data, res) {

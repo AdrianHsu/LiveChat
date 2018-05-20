@@ -17,7 +17,9 @@
 * 有成功把 webpack-dev-server 的 LiveReload 弄起來了
 * [https://rhadow.github.io/2015/04/02/webpack-workflow/](https://rhadow.github.io/2015/04/02/webpack-workflow/)
 
+## 解決 mongoose 的 `connect()` 只能連一個 db
 
+* [http://jayceefun.github.io/blog/2013/08/27/mongoose_multi_dbs/](http://jayceefun.github.io/blog/2013/08/27/mongoose_multi_dbs/)
 
 ## 127.0.0.1 v.s. 0.0.0.0
 

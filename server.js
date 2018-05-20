@@ -5,9 +5,13 @@ var io = require('socket.io')(http);
 var path = require('path');
 var webpack = require('webpack');
 var bodyParser = require('body-parser');
+var mongoose = require('mongoose');
 
 const UserSocket = require('./src/socket/UserSocket.js');
 const userSocket = new UserSocket();
+
+const MsgSocket = require('./src/socket/MessageSocket.js');
+const msgSocket = new MsgSocket();
 const port = 3000;
 
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -72,22 +76,22 @@ io.on('connection', (socket) => {
         name_id_dict[username] = socket.id;
     })
     socket.on('message', (myMsg, cb) => {
-        var msg = JSON.parse(myMsg)['msg'];
-        var from = JSON.parse(myMsg)['from'];
-        var to = JSON.parse(myMsg)['to'];
+        myMsg = JSON.parse(myMsg);
 
         // time is the "server received time"
-
         var date = new Date();
         var localeSpecificTime = date.toLocaleTimeString();
         date = localeSpecificTime.replace(/:\d+ /, ' ');
 
-        var fullMsg = JSON.stringify({from: from, 
-            msg: msg, to: to, time: date});
+        var fullMsg = JSON.stringify({from: myMsg.from, 
+            msg: myMsg.msg, to: myMsg.to, time: date});
+        
+        // msgSocket.storeMessages(fullMsg);
+
         console.log('received msg:' + fullMsg);
         cb('[ack] server received: ' + fullMsg);
-        io.to(name_id_dict[from]).emit('message', fullMsg);
-        io.to(name_id_dict[to]).emit('message', fullMsg);
+        io.to(name_id_dict[myMsg.from]).emit('message', fullMsg);
+        io.to(name_id_dict[myMsg.to]).emit('message', fullMsg);
     });
 
 
