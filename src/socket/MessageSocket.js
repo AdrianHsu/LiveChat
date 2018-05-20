@@ -10,7 +10,6 @@ class MessageSocket {
     }
 
     storeMessages(data) {
-
         console.log(data);
         var newMessage = new Message({
             from: data.from,
@@ -27,6 +26,22 @@ class MessageSocket {
             else{
                 console.log('received msg: ' + data);
             } 
+        });
+    }
+
+    loadBothMessages(me, friend, res) {
+        Message.find({
+            $and: [
+                { $or: [{from: me}, {from: friend}] },
+                { $or: [{to: me}, {to: friend}] }
+            ]
+        }, function (err, data) {
+            if(err) {
+                console.log(err);
+            } else {
+                // console.log(data);
+                res.send(data);
+            }
         });
     }
 }

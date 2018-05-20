@@ -69,6 +69,11 @@ app.get('/user/allusers', function(req, res){
     const me = req.query.username;
     userSocket.sendFriendList(me, res);
 });
+app.get('/msg/both', function(req, res) {
+    const me = req.query.username;
+    const f = req.query.friendname;
+    msgSocket.loadBothMessages(me, f, res);
+})
 
 name_id_dict = {};
 io.on('connection', (socket) => {

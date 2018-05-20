@@ -6,6 +6,7 @@ import ChatRoomLayout from './ChatRoomLayout.js';
 import { Grid } from '@material-ui/core';
 import ButtonAppBar from './ButtonAppBar.js';
 import axios from 'axios';
+import { ENGINE_METHOD_DIGESTS } from 'constants';
 
 const styles = theme => ({
   root: {
@@ -66,7 +67,42 @@ class ChatGridLayout extends React.Component{
       friendname: name,
       friendicon: icon,
       messageList: []
-    });
+    }, () => {
+      axios.get('/msg/both', {
+        params: {
+          username: this.state.username,
+          friendname: this.state.friendname
+        }
+      })
+      .then((res) => {
+        res.data.sort((a, b) => a.timestamp - b.timestamp); // works!
+        for(var i = 0; i < res.data.length; i++) {
+          var msg = res.data[i];
+          var item = {};
+          if(msg.from === this.state.username){
+            item.avatarUrl = this.state.icon;
+            item.authorName = this.state.username;
+            item.isOwn = true;
+          } else if (msg.from === this.state.friendname ){
+            item.avatarUrl = this.state.friendicon;
+            item.authorName = this.state.friendname;
+            item.isOwn = false;
+          } else {
+            return null;
+          }
+          item.msg = msg.msg;
+          item.time = msg.time;
+          this.setState({
+            messageList: this.state.messageList.concat(item)
+          }, () => {
+            console.log(this.state.messageList);
+          });
+        }
+      })
+      .catch(function (error) {
+        console.log(error);
+      }); 
+    }); 
   };
 
   render() {
