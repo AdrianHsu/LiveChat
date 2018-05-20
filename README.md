@@ -1,6 +1,6 @@
 # chatroom
 
-> 🏃 Let's chat with your friends.
+> 🏃 Live chatroom built with Socket.io, React, MongoDB, Express and Node.js
 
 
 <p align=center>
@@ -28,6 +28,22 @@ $ npm run start
 
 # demo page: http://localhost:3000/
 ```
+
+
+
+## Demo Version
+
+* For **deploy-https** branch: 
+
+  * HTTPS protocol (SSL certificate, listen on 8080 port)
+
+  * nginx back-end server (reverse proxy, port forwarding from 8080 to 443)
+
+    
+
+* For **master** branch: 
+
+  * HTTP protocol (no certificate, listen on 3000 port)
 
 
 
@@ -229,19 +245,19 @@ MIT License
 ## Main Feature
 
 - Contact List
-  - Show all Friends in the database who you could chat with
+  - Show all the friends in the database who you could chat with
   - Once the particular user has been signed up, anyone could chat with him/her
-  - highlight the friend who you're chat with
+  - highlight the friend who you're chatting with
 - Current friend you're chatting with
   - print the friend name and friend icon on the top bar
 - Chatroom Layout
   - sort the messages by their timestamp
   - the newest message will be put in the button
   - print out the message, time, and name
-  - messages from self will be on the right; messages from friends will be on the left
+  - messages from yourself will be put  on the right; messages from friends will be on the left
 - Input text box
   - send button
-  - key press "enter" will send also
+  - key press "enter" will be sent, too
   - prevent from sending empty message
 - show username on the top bar (pink color bar), and also the **document title**
 - support one-to-one messaging
