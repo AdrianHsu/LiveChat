@@ -27,6 +27,7 @@ $ npm run build
 $ npm run start 
 
 # demo page: http://localhost:3000/
+# demo page: https://adrianhsu.app/
 ```
 
 
