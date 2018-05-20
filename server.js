@@ -1,7 +1,9 @@
 var express = require('express');
 const app = express();
-var http = require('http').Server(app);
-var io = require('socket.io')(http);
+// var http = require('http').Server(app);
+var https = require('https');
+var fs = require('fs'); // new!
+var io = require('socket.io')(https);
 var path = require('path');
 var webpack = require('webpack');
 var bodyParser = require('body-parser');
@@ -118,9 +120,9 @@ io.on('connection', (socket) => {
     });
 });
 
-http.listen(port, function(err) {
-    if (err) {
-        console.log(err);
-    }
-    console.log('listen on port ' + port);
-});
+const options = {
+    key: fs.readFileSync('/etc/nginx/ssl/cert.key'),
+    cert: fs.readFileSync('/etc/nginx/ssl/cert.pem')
+};
+
+var httpsServer = https.createServer(options, app).listen(8080, '0.0.0.0');
