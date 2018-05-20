@@ -85,12 +85,13 @@ io.on('connection', (socket) => {
         date = localeSpecificTime.replace(/:\d+ /, ' ');
 
         var obj = {from: myMsg.from, 
-            msg: myMsg.msg, to: myMsg.to, time: date};
+            msg: myMsg.msg, to: myMsg.to, time: date, 
+            timestamp: new Date().getTime().toString()};
         
         msgSocket.storeMessages(obj);
         
         var fullMsg = JSON.stringify(obj);
-        console.log('received msg:' + fullMsg);
+        // console.log('received msg:' + fullMsg);
         cb('[ack] server received: ' + fullMsg);
         io.to(name_id_dict[obj.from]).emit('message', fullMsg);
         io.to(name_id_dict[obj.to]).emit('message', fullMsg);

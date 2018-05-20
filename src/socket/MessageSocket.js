@@ -16,7 +16,8 @@ class MessageSocket {
             from: data.from,
             to: data.to,
             msg: data.msg,
-            time: data.time
+            time: data.time,
+            timestamp: data.timestamp
         });
         
         newMessage.save(function(err, data){
@@ -24,7 +25,7 @@ class MessageSocket {
                 console.log(err); 
             }
             else{
-                console.log(data);
+                console.log('received msg: ' + data);
             } 
         });
     }
