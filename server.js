@@ -1,16 +1,15 @@
 var express = require('express');
+const app = express();
+var http = require('http').Server(app);
+var io = require('socket.io')(http);
 var path = require('path');
 var webpack = require('webpack');
 var bodyParser = require('body-parser');
-var mongoose = require('mongoose');
-var userModel = require('./src/models/User.js');
 
+const UserSocket = require('./src/socket/UserSocket.js');
+const userSocket = new UserSocket();
 const port = 3000;
 
-mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://localhost:27017/userdb');
-
-const app = express();
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
@@ -27,7 +26,7 @@ app.get('/signup', function(req, res) {
 })
 
 app.get('/chatroom', function(req, res) {
-    console.log('redirect to: chatroom');
+    // console.log('redirect to: chatroom');
     res.sendFile(path.join(__dirname, './public/chatroom.html'));
 })
 
@@ -37,45 +36,77 @@ app.get('/redirect', function(req, res) {
 })
 
 app.post('/user/signup', function (req, res) {
-    var newUser = new userModel({
-        username: req.body.username,
+    
+    var newUser = {username: req.body.username,
         password: req.body.password,
-        updateTime: req.body.updateTime
-    });
-    newUser.save(function(err, data){
-        if(err){ 
-            console.log(err); 
-            res.send(err);
-        }
-        else{
-            console.log(data);
-            res.send(data);
-        } 
-    });
+        icon: './assets/default.png',
+        updateTime: req.body.updateTime};
+    
+    userSocket.storeUsers(newUser, res);
 });
 app.post('/user/login', function (req, res) {
-    var newUser = new userModel({
+    var myUser = {
         username: req.body.username,
         password: req.body.password,
+        icon: './assets/default.png',
         updateTime: req.body.updateTime
+    };
+
+    userSocket.checkUsers(myUser, res);
+});
+
+app.get('/user/myicon', function(req, res) {
+    const me = req.query.username;
+    userSocket.sendIcon(me, res);
+})
+
+app.get('/user/allusers', function(req, res){
+    const me = req.query.username;
+    userSocket.sendFriendList(me, res);
+});
+
+name_id_dict = {};
+io.on('connection', (socket) => {
+    socket.on('username', (username, cb) => {
+        console.log( "connect: " + socket.id + ', ' + username);
+        name_id_dict[username] = socket.id;
+    })
+    socket.on('message', (myMsg, cb) => {
+        var msg = JSON.parse(myMsg)['msg'];
+        var from = JSON.parse(myMsg)['from'];
+        var to = JSON.parse(myMsg)['to'];
+
+        // time is the "server received time"
+
+        var date = new Date();
+        var localeSpecificTime = date.toLocaleTimeString();
+        date = localeSpecificTime.replace(/:\d+ /, ' ');
+
+        var fullMsg = JSON.stringify({from: from, 
+            msg: msg, to: to, time: date});
+        console.log('received msg:' + fullMsg);
+        cb('[ack] server received: ' + fullMsg);
+        io.to(name_id_dict[from]).emit('message', fullMsg);
+        io.to(name_id_dict[to]).emit('message', fullMsg);
     });
-    userModel.find({ 'username': newUser.username,
-        'password': newUser.password }, function(err, user) {
-        
-        if(err){ 
-            console.log(err); 
-            res.send(err);
-        } else if (user.length == 1) {
-            console.log(user);
-            res.redirect('/chatroom'); 
-        } else {
-            console.log('not found');
-            res.send('not found');
+
+
+    socket.on("disconnect", () => {
+        var id = socket.id;
+        var username = "";
+        for (const key in name_id_dict) {
+            const value = name_id_dict[key];
+            if(value === id) {
+                username = key;
+                break;
+            }
         }
+        console.log("disconnect: " + id + ", " + username);
+        name_id_dict[username] = null;
     });
 });
 
-app.listen(port, function(err) {
+http.listen(port, function(err) {
     if (err) {
         console.log(err);
     }

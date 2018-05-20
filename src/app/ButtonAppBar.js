@@ -21,20 +21,28 @@ const styles = {
   },
 };
 
-function ButtonAppBar(props) {
-  const { classes } = props;
-  return (
-    <div className={classes.root}>
-      <AppBar position="static">
-        <Toolbar>
-          <Typography variant="title" color="inherit" className={classes.flex}>
-            許秉鈞
-          </Typography>
-          <Button color="inherit">登出</Button>
-        </Toolbar>
-      </AppBar>
-    </div>
-  );
+class ButtonAppBar extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+  render() {
+    const { classes } = this.props;
+    return (
+      <div className={classes.root}>
+        <AppBar position="static">
+          <Toolbar>
+            <IconButton className={classes.menuButton} color="inherit" aria-label="Menu">
+              <MenuIcon />
+            </IconButton>
+            <Typography variant="title" color="inherit" className={classes.flex}>
+              {this.props.username}
+            </Typography>
+            <Button color="inherit">登出</Button>
+          </Toolbar>
+        </AppBar>
+      </div>
+    );
+  }
 }
 
 ButtonAppBar.propTypes = {

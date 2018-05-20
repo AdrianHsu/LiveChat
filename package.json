@@ -37,6 +37,8 @@
     "mongoose-unique-validator": "^2.0.1",
     "react": "^16.3.2",
     "react-dom": "^16.3.2",
+    "socket.io": "^2.1.1",
+    "socket.io-client": "^2.1.1",
     "typeface-roboto": "0.0.54",
     "webpack": "^4.8.3",
     "webpack-cli": "^2.1.3"

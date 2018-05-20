@@ -7,7 +7,6 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import axios from 'axios';
-import { RSA_NO_PADDING } from 'constants';
 
 class Login extends React.Component {
 
@@ -21,7 +20,7 @@ class Login extends React.Component {
   }
   componentWillMount = () => {
     console.log("componentWillMount()");
-    var retrievedObject = localStorage.getItem('userInfo');
+    var retrievedObject = sessionStorage.getItem('userInfo');
     if(retrievedObject != null) {
       window.alert(retrievedObject + '\n您已經登入，重新導向至聊天室...');
       window.location = '/chatroom';
@@ -45,14 +44,14 @@ class Login extends React.Component {
     .then(function (res) {
       if(res.data != 'not found') { // no error
 
-        localStorage.clear(); // clear old data
+        sessionStorage.clear(); // clear old data
         var userInfo = { 'username': _self.state.field_user, 
-          'password': _self.state.field_pass };
-        localStorage.setItem('userInfo', JSON.stringify( userInfo ));
-        var retrievedObject = localStorage.getItem('userInfo');
-        console.log('retrievedObject: ', JSON.parse(retrievedObject));
+          'password': _self.state.field_pass};
+        sessionStorage.setItem('userInfo', JSON.stringify( userInfo ));
+        // var retrievedObject = sessionStorage.getItem('userInfo');
+        // console.log('retrievedObject: ', JSON.parse(retrievedObject));
 
-        window.alert(retrievedObject + '\n登入成功！');
+        window.alert(userInfo['username'] + ': 登入成功！');
         window.location = '/chatroom';
       } else { // _message is ERROR message, error occurs!
         console.log(res.data);
@@ -66,7 +65,8 @@ class Login extends React.Component {
     })
     .catch(function (error) {
       console.log(error);
-    });  
+    })
+    
 
   };
 

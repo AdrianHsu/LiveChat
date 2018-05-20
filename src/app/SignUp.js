@@ -20,7 +20,7 @@ class SignUp extends React.Component {
   }
   componentWillMount = () => {
     console.log("componentWillMount()");
-    var retrievedObject = localStorage.getItem('userInfo');
+    var retrievedObject = sessionStorage.getItem('userInfo');
     if(retrievedObject != null) {
       window.alert(retrievedObject + '\n您已經登入，重新導向至聊天室...');
       window.location = '/chatroom';
@@ -44,8 +44,7 @@ class SignUp extends React.Component {
     })
     .then(function (res) {
       if(res.data._message == null) { // no error
-        console.log(res.data);
-        window.alert(res.data + '\n註冊成功！');
+        window.alert('註冊成功！');
         _self.loginPage();
       } else { // _message is ERROR message, error occurs!
         console.log(res.data._message);
