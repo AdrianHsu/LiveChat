@@ -71,6 +71,19 @@ $ tree
 
 
 
+## Required global packages
+
+Since that some of my packages are installed **globally**, so you might need to install them yourselves.
+
+```shell
+$ npm install -g nodemon@1.17.4
+$ sudo yum install -y mongodb-org # version: 3.6
+```
+
+
+
+
+
 ## Screenshot
 
 1. Login Page: [http://localhost:3000/login](http://localhost:3000/login)
