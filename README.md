@@ -191,7 +191,7 @@ const messageSchema = mongoose.Schema({
 
 ## Known Issues
 
-1. When running the command  `npm run build` ，it generates some warnings shown below (but they has no effect on the compile process, so please just ignore them!)
+1. When running the command  `npm run build`  it generates some warnings, as shown below (but they have no real effect on the compile process, so please just ignore them!)
 
 ![build](img/build.png)
 
