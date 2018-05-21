@@ -1,5 +1,6 @@
 const UserSchema = require('../models/User.js');
 const mongoose = require('mongoose');
+var sha256 = require('js-sha256');
 
 var User = null;
 class UserSocket {
@@ -12,7 +13,7 @@ class UserSocket {
 
         var newUser = new User({
             username: data.username,
-            password: data.password,
+            password: sha256(data.password),
             icon: data.icon,
             updateTime: data.updateTime
         });
@@ -31,7 +32,7 @@ class UserSocket {
     checkUsers(data, res) {
         var myUser = new User({
             username: data.username,
-            password: data.password,
+            password: sha256(data.password),
             icon: data.icon,
             updateTime: data.updateTime
         });

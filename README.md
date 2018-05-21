@@ -215,10 +215,6 @@ const messageSchema = mongoose.Schema({
 
 ![build](img/build.png)
 
-2. **[IMPORTANT]** I didn't encrypt the password, and it's very dangerous.
-
-![e](img/encrypt.png)
-
 
 
 ## License

@@ -69,7 +69,7 @@ class ChatRoomLayout extends React.Component {
     var myMsg = JSON.stringify({msg: msg, 
       from: this.props.username, to: this.props.friendname});
     this.socket.emit('message', myMsg, (ack) => {
-      console.log(ack);
+        console.log(ack);
     });
   }
 

@@ -91,7 +91,7 @@ class ChatGridLayout extends React.Component{
         tmp[i].lastMsg = '我: ' + item.msg + ' (' + item.time + ')';
         // tmp[i].notifNum += 1;
         this.setState({friendList: tmp}, () => {
-          // console.log(this.state.friendList);
+            //console.log(this.state.friendList);
         });
         break;
       }

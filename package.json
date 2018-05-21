@@ -32,6 +32,7 @@
     "babel-loader": "^8.0.0-beta.2",
     "body-parser": "^1.18.3",
     "express": "^4.16.3",
+    "js-sha256": "^0.9.0",
     "material-ui": "^0.20.1",
     "mongo": "^0.1.0",
     "mongoose": "^5.1.1",
