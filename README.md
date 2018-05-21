@@ -260,7 +260,6 @@ MIT License
   - open 2 pages in your browser, and you can use different users to chat to each other
 - sign up: username + password
   - username is **unique**, so the name and socket id are mapped 1-to-1
-  - password is not encryted, see **known issues**
 - default user icon (yellow smile face)
 - Logout button
 - message notification (red badges)
